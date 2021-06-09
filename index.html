@@ -11,8 +11,32 @@
   <div class="books">
 		
 	</div>
-	<button id="add-book">Add new book</button>
+
+  <table id="books-table">
+    <thead>
+      <th>Title</th>
+      <th>Author</th>
+      <th>Pages</th>
+      <th>Read?</th>
+    </thead>
+  </table>
     
+  <div>
+    <button id="add-book">Add new book</button>
+    <form id="new-book">
+      <label for="new-title">Title</label>
+      <input id="new-title" type="text">
+      <br>
+      <label for="new-author">Author</label>
+      <input id="new-author" type="text">
+      <br>
+      <label for="new-pages">Pages</label>
+      <input id="new-pages" type="number">
+      <label for="new-read">Read?</label>
+      <input id="new-read" type="checkbox">
+      <button id="add-new-book">Submit</button>
+    </form>
+  </div>
   <script src="index.js"></script>
 </body>
 </html>
