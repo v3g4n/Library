@@ -1,0 +1,11 @@
+
+
+body {
+    margin: 50px;
+}
+
+
+.card {
+    min-width: 18rem;
+    max-width: 18rem;
+}
