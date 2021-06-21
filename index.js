@@ -3,18 +3,21 @@ let myLibrary = []
 
 const booksDiv = document.getElementById('library');
 const addBookButton = document.getElementById('add-book');
-// const booksTable = document.getElementById('books-table');
 const submitBookFormButton = document.getElementById('add-new-book');
-// const readToggleButtons = document.querySelectorAll(".is-read");
-// const removeButtons = document.querySelectorAll(".remove-book");
 
-function Book (title, author, pages, isRead=false) {
-    this.title = title;
-    this.author = author;
-    this.pages = pages;
-    this.isRead = isRead;
-    Book.prototype.count = Book.prototype.count ? Book.prototype.count + 1 : 1;
-    this.id = Book.prototype.count;
+class Book {
+    constructor(title, author, pages, isRead=false) {
+        this.title = title;
+        this.author = author;
+        this.pages = pages;
+        this.isRead = isRead;
+        Book.prototype.count = Book.prototype.count ? Book.prototype.count + 1 : 1;
+        this.id = Book.prototype.count;
+    }
+    
+    toggleRead() {
+        this.isRead ? this.isRead = false : this.isRead = true;
+    }
 }
 
 // Book.prototype.info = function() {
@@ -24,14 +27,6 @@ function Book (title, author, pages, isRead=false) {
 //     }
 //     return `${this.title} by ${this.author}, ${this.pages} pages, ${readString}`
 // }
-
-Book.prototype.toggleRead = function() {
-    if (this.isRead) {
-        this.isRead = false;
-    } else {
-        this.isRead = true;
-    }
-}
 
 displayBooks();
 
@@ -69,6 +64,7 @@ booksDiv.addEventListener('click', (e) => {
             readButton.innerHTML = 'read'
             currentBook.isRead = true;
         }
+    // Clicked remove button?
     } else if (e.target.classList.contains('remove-book')) {
         e.preventDefault;
         const removeButton = e.target;
@@ -83,8 +79,7 @@ booksDiv.addEventListener('click', (e) => {
     }
 })
 
-
-
+// When submit button is clicked to add new book
 submitBookFormButton.addEventListener('click', (e) => {
     e.preventDefault();
     const newAuthorInput = document.getElementById('new-author');
@@ -100,6 +95,7 @@ submitBookFormButton.addEventListener('click', (e) => {
     addBookToLibrary(newBook);
 })
 
+// Create a new card to display the book info and add it to the parent div
 function display(book) {
     const card = document.createElement('div');
     card.setAttribute('book-id', book.id);
@@ -130,8 +126,8 @@ function display(book) {
     booksDiv.appendChild(card);
 }
 
+// Loop through all books in the myLibrary array and display them
 function displayBooks () {
-    booksDiv.innerHTML = '';
     for (let book of myLibrary) {
         display(book);
     }
